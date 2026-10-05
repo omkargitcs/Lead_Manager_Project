@@ -230,16 +230,23 @@ Redeploy the backend. Then open the frontend URL and test the complete flow agai
 ## Key technical decisions
 
 ### Why React + Vite?
+
 Small responsive UI with a simple build and deployment model.
 
 ### Why FastAPI?
+
 Fast REST API development, automatic request validation and interactive Swagger documentation.
 
 ### Why PostgreSQL in production and SQLite locally?
+
 SQLite keeps local setup very small; PostgreSQL is a better shared production database and is directly supported by Render.
 
 ### Why OpenAI API?
+
 The assignment explicitly asks for a practical AI feature. The app keeps the AI scope focused on two useful actions: summarizing interaction notes and drafting a follow-up message.
 
 ### Why no authentication?
+
 Authentication is not part of the assignment requirements. Keeping it out avoids spending the limited assignment time on non-scoring infrastructure.
+
+AI-powered event lead management system built with React, FastAPI, SQLite/PostgreSQL and Gemini AI.
