@@ -1,26 +1,44 @@
 import os
 
 from dotenv import load_dotenv
-from google import genai
 
 load_dotenv()
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3-flash-preview").strip()
 
-if not GEMINI_API_KEY:
-    raise RuntimeError("GEMINI_API_KEY is missing from backend/.env")
+# Import the SDK only when it is actually needed. This allows the
+# FastAPI application to start even when no Gemini API key is configured.
+client = None
 
-client = genai.Client(api_key=GEMINI_API_KEY)
+
+def _get_client():
+    global client
+
+    if not GEMINI_API_KEY:
+        raise RuntimeError(
+            "GEMINI_API_KEY is not configured. Add it to Render environment variables "
+            "to enable AI features."
+        )
+
+    if client is None:
+        from google import genai
+        client = genai.Client(api_key=GEMINI_API_KEY)
+
+    return client
 
 
 def generate_ai_response(prompt: str) -> str:
-    response = client.models.generate_content(
+    response = _get_client().models.generate_content(
         model=GEMINI_MODEL,
         contents=prompt,
     )
 
-    return response.text.strip()
+    text = getattr(response, "text", None)
+    if not text:
+        raise RuntimeError("Gemini returned an empty response.")
+
+    return text.strip()
 
 
 def summarize_notes(notes: str) -> str:
@@ -67,19 +85,12 @@ The message should:
 
 
 def generate_ai_text(*args, **kwargs) -> str:
-    """
-    Generate AI text while remaining compatible with the
-    existing FastAPI AI endpoints.
-    """
-
-    # Get values whether they are passed positionally or by keyword.
+    """Generate AI text while remaining compatible with existing endpoints."""
     notes = kwargs.get("notes", "")
     name = kwargs.get("name", "")
     company = kwargs.get("company", "")
     event = kwargs.get("event", "")
 
-    # If the existing endpoint passes a positional value,
-    # use it as the notes/prompt only when notes wasn't supplied.
     if args and not notes:
         notes = args[0]
 
