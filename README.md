@@ -45,9 +45,9 @@
 
 | What | Link |
 |---|---|
-| 🌐 **Live application (frontend)** | `[(https://leadmanage04.netlify.app/)` ← |
+| 🌐 **Live application (frontend)** | | https://leadmanage04.netlify.app/ |
 | ⚙️ **Backend API** | https://lead-manager-project-4y3r.onrender.com |
-| 📖 **Swagger / OpenAPI docs** | https://lead-manager-project-4y3r.onrender.com/docs |
+| 📖 **Swagger** | https://lead-manager-project-4y3r.onrender.com/docs |
 | ❤️ **Health check** | https://lead-manager-project-4y3r.onrender.com/health |
 | 💻 **GitHub repository** | `[https://github.com/omkargitcs/Lead_Manager_Project/edit/main/README.md]` ← |
 
@@ -659,19 +659,6 @@ This project was built using AI-assisted tools for speed, with every decision re
 
 ---
 
-## ✅ Submission Checklist
-
-- [ ] Public GitHub repository
-- [ ] Live frontend URL added to [Live Links](#-live-links)
-- [ ] Backend `/health` and `/docs` working
-- [ ] Create / edit / delete works on the live site
-- [ ] Search and filters work
-- [ ] Data persists after refresh
-- [ ] AI summary works
-- [ ] AI follow-up works
-- [ ] No API keys or `.env` files committed
-- [ ] (Optional) Demo video linked
-- [ ] Email sent to **careers@even8.io** with subject **`Full Stack Assignment <Your Name>`**
 
 ---
 
