@@ -11,7 +11,7 @@
 ![AI](https://img.shields.io/badge/AI-Google%20Gemini-4285F4?logo=google&logoColor=white)
 ![Deploy](https://img.shields.io/badge/Deployed%20on-Render-46E3B7?logo=render&logoColor=white)
 
-[🌐 Live App](#-live-links) · [📖 API Docs](https://lead-manager-project-4y3r.onrender.com/docs) · [🚀 Quick Start](#-quick-start) · [🧠 Key Decisions](#-key-technical-decisions) · [🧪 Test It](#-try-it-in-2-minutes)
+[🌐 Live App](https://leadmanage04.netlify.app/) · [📖 API Docs](https://lead-manager-project-4y3r.onrender.com/docs) · [🚀 Quick Start](#-quick-start) · [🧠 Key Decisions](#-key-technical-decisions) · [🧪 Test It](#-try-it-in-2-minutes)
 
 </div>
 
@@ -33,11 +33,11 @@
 - [📡 API Reference](#-api-reference)
 - [🗄️ Database Design](#️-database-design)
 - [🤖 AI Integration](#-ai-integration)
-- [☁️ Deployment (Render)](#️-deployment-render)
+- [☁️ Deployment (Render + Netlify)](#️-deployment-render--netlify)
 - [🧠 Key Technical Decisions](#-key-technical-decisions)
 - [🛠️ Troubleshooting](#️-troubleshooting)
 - [⚠️ Known Limitations & Roadmap](#️-known-limitations--roadmap)
-- [✅ Submission Checklist](#-submission-checklist)
+- [📬 Contact & Submission](#-contact--submission)
 
 ---
 
@@ -45,11 +45,11 @@
 
 | What | Link |
 |---|---|
-| 🌐 **Live application (frontend)** | | https://leadmanage04.netlify.app/ |
+| 🌐 **Live application (frontend)** | https://leadmanage04.netlify.app/ |
 | ⚙️ **Backend API** | https://lead-manager-project-4y3r.onrender.com |
-| 📖 **Swagger** | https://lead-manager-project-4y3r.onrender.com/docs |
+| 📖 **Swagger / OpenAPI docs** | https://lead-manager-project-4y3r.onrender.com/docs |
 | ❤️ **Health check** | https://lead-manager-project-4y3r.onrender.com/health |
-| 💻 **GitHub repository** | `[https://github.com/omkargitcs/Lead_Manager_Project/edit/main/README.md]` ← |
+| 💻 **GitHub repository** | https://github.com/omkargitcs/Lead_Manager_Project |
 
 
 > 💤 **Heads-up:** On Render's free tier the backend sleeps when idle. The first request can take **30–60 seconds** to wake it up — please be patient, then everything is fast.
@@ -93,8 +93,8 @@
 
 ```mermaid
 flowchart LR
-    U([👤 User]) --> F["⚛️ React + Vite<br/>Static Site"]
-    F -- "HTTP / JSON" --> B["⚡ FastAPI<br/>Web Service"]
+    U([👤 User]) --> F["⚛️ React + Vite<br/>Netlify"]
+    F -- "HTTP / JSON" --> B["⚡ FastAPI<br/>Render"]
     B -- "SQLAlchemy ORM" --> D[("🗄️ PostgreSQL (prod)<br/>SQLite (local)")]
     B -- "google-genai SDK" --> G["🤖 Google Gemini"]
 ```
@@ -126,7 +126,7 @@ sequenceDiagram
 | **Backend** | Python 3.13, FastAPI, Uvicorn, Pydantic v2 |
 | **Database** | SQLAlchemy 2.0 ORM · SQLite (dev) · PostgreSQL via `psycopg` (prod) |
 | **AI** | Google Gemini through the `google-genai` SDK |
-| **Hosting** | Render (Web Service + Static Site + managed PostgreSQL) |
+| **Hosting** | Netlify (frontend) · Render (FastAPI web service + managed PostgreSQL) |
 
 ---
 
@@ -452,11 +452,11 @@ erDiagram
 
 ---
 
-## ☁️ Deployment (Render)
+## ☁️ Deployment (Render + Netlify)
 
 ```mermaid
 flowchart LR
-    A[1️⃣ PostgreSQL] --> B[2️⃣ FastAPI Web Service] --> C[3️⃣ React Static Site] --> D[4️⃣ Update CORS_ORIGINS]
+    A[1️⃣ PostgreSQL] --> B[2️⃣ FastAPI Web Service] --> C[3️⃣ React on Netlify] --> D[4️⃣ Update CORS_ORIGINS]
 ```
 
 <details>
@@ -492,28 +492,30 @@ GEMINI_MODEL=gemini-3-flash-preview
 CORS_ORIGINS=<frontend URL — see step 4>
 ```
 
-Verify: `https://YOUR-BACKEND.onrender.com/health` → `{"status":"ok"}` and `/docs` loads.
+Verify: `https://lead-manager-project-4y3r.onrender.com/health` → `{"status":"ok"}` and `/docs` loads.
 
 > A `render.yaml` blueprint for the backend is included in the repo.
 
 </details>
 
 <details>
-<summary><b>3️⃣ Frontend — Render Static Site</b></summary>
+<summary><b>3️⃣ Frontend — Netlify</b></summary>
 
 <br/>
 
 | Setting | Value |
 |---|---|
-| Root directory | `frontend` |
+| Base directory | `frontend` |
 | Build command | `npm install && npm run build` |
-| Publish directory | `dist` |
+| Publish directory | `frontend/dist` |
 
 Environment variable:
 
 ```text
-VITE_API_URL=https://YOUR-BACKEND.onrender.com
+VITE_API_URL=https://lead-manager-project-4y3r.onrender.com
 ```
+
+Set it in Netlify under **Site configuration → Environment variables** *before* building, then trigger a redeploy.
 
 </details>
 
@@ -525,10 +527,10 @@ VITE_API_URL=https://YOUR-BACKEND.onrender.com
 Once the frontend has its final URL, set this on the backend service and redeploy:
 
 ```text
-CORS_ORIGINS=https://YOUR-FRONTEND.onrender.com
+CORS_ORIGINS=https://leadmanage04.netlify.app
 ```
 
-Then run through the [2-minute tour](#-try-it-in-2-minutes) on the live site.
+Then run through the [2-minute tour](#-try-it-in-2-minutes) on the [live site](https://leadmanage04.netlify.app/).
 
 </details>
 
@@ -541,7 +543,7 @@ See also: [`DEPLOYMENT-CHECKLIST.md`](DEPLOYMENT-CHECKLIST.md).
 <details open>
 <summary><b>Why React + Vite?</b></summary>
 
-Fast dev server, tiny config and a simple static build — ideal for a focused single-page UI that deploys as a Render Static Site with no server runtime.
+Fast dev server, tiny config and a simple static build — ideal for a focused single-page UI that deploys to Netlify as static files with no server runtime.
 
 </details>
 
@@ -622,7 +624,7 @@ This project was built using AI-assisted tools for speed, with every decision re
 <details>
 <summary><b>Frontend talks to the wrong backend</b></summary>
 
-<br/>Set `VITE_API_URL` in `frontend/.env` and restart `npm run dev`. For deployed builds, set it in Render **before** building — Vite bakes it in at build time.
+<br/>Set `VITE_API_URL` in `frontend/.env` and restart `npm run dev`. For deployed builds, set it in Netlify **before** building — Vite bakes it in at build time.
 
 </details>
 
@@ -659,11 +661,21 @@ This project was built using AI-assisted tools for speed, with every decision re
 
 ---
 
+## 📬 Contact & Submission
+
+This project was submitted to **Even8** for the *AI Native Full Stack Intern* assignment.
+
+| | |
+|---|---|
+| **Email** | [pn@even8.io](mailto:pn@even8.io) |
+| **Subject** | `Full Stack Assignment <Your Name>` |
+| **Repository** | https://github.com/omkargitcs/Lead_Manager_Project |
+| **Live app** | https://leadmanage04.netlify.app/ |
 
 ---
 
 <div align="center">
 
-Built with ❤️ for **[Even8](https://even8.io)** · Questions? Open an issue or reach out.
+Built with ❤️ for **[Even8](https://even8.io)** · [pn@even8.io](mailto:pn@even8.io) · Questions about this project? [Open an issue](https://github.com/omkargitcs/Lead_Manager_Project/issues).
 
 </div>
