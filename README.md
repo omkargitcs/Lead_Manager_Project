@@ -45,12 +45,12 @@
 
 | What | Link |
 |---|---|
-| 🌐 **Live application (frontend)** | `https://YOUR-FRONTEND.onrender.com` ← *replace with your Static Site URL* |
+| 🌐 **Live application (frontend)** | `[(https://leadmanage04.netlify.app/)` ← |
 | ⚙️ **Backend API** | https://lead-manager-project-4y3r.onrender.com |
 | 📖 **Swagger / OpenAPI docs** | https://lead-manager-project-4y3r.onrender.com/docs |
 | ❤️ **Health check** | https://lead-manager-project-4y3r.onrender.com/health |
-| 💻 **GitHub repository** | `https://github.com/YOUR-USERNAME/YOUR-REPO` ← *replace* |
-| 🎥 **Demo video (optional)** | `https://…` ← *replace or delete this row* |
+| 💻 **GitHub repository** | `[https://github.com/omkargitcs/Lead_Manager_Project/edit/main/README.md]` ← |
+
 
 > 💤 **Heads-up:** On Render's free tier the backend sleeps when idle. The first request can take **30–60 seconds** to wake it up — please be patient, then everything is fast.
 
