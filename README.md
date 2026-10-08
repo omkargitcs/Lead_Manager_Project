@@ -657,13 +657,7 @@ This project was built using AI-assisted tools for speed, with every decision re
 - [ ] Pagination and sorting controls
 - [ ] Save AI summaries / drafts on the lead
 - [ ] CSV import / export
-- [ ] "Send via email" integration for follow-ups
-
----
-
-## 📬 Contact & Submission
-
-This project was submitted to **Even8** for the *AI Native Full Stack Intern* assignment.
+- [ ] "Send via email" integration for f
 
 | | |
 |---|---|
@@ -676,6 +670,6 @@ This project was submitted to **Even8** for the *AI Native Full Stack Intern* as
 
 <div align="center">
 
-Built with ❤️ for **[Even8](https://even8.io)** · [pn@even8.io](mailto:pn@even8.io) · Questions about this project? [Open an issue](https://github.com/omkargitcs/Lead_Manager_Project/issues).
+
 
 </div>
